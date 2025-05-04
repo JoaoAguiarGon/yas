@@ -1,69 +1,165 @@
-<html>
-    <head>
-        <style>
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #fce4ec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            font-family: sans-serif;
+        }
 
-}
+        .heart {
+            color: #ff4d6d;
+            font-size: 24px;
+            position: absolute;
+            animation: float 10s infinite;
+            user-select: none;
+            pointer-events: none;
+        }
 
-a {
-    text-decoration: none;
-}
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
-.box {
-    font-size: 20px;
-    width: 11150px;
-    height: 11150px;
-    color: white;
-    border-radius: 100px;
-    background: black;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .box {
+            font-size: 18px;
+            width: 90%;
+            max-width: 400px;
+            height: 280px;
+            color: white;
+            border-radius: 20px;
+            background: black;
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+        }
 
-.buttons-container {
-    display: flex;
-    justify-content: space-around;
-    height: 50px;
-    width: 150px;
-}
-button {
-    height: 30px;
-    width: 50px;
-    background: white;
-    border-radius: 5px;
-    color: blue;
-    font-weight: 600;
-}
+        .buttons-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-        </style>
-        <body>
-            <body>
-                <div class="box">
-                 <p>Você Namoraria o joao?</p>
-                 <div class="buttons-container">
-                     <button> 
-                         <a href="https://joaoaguiargon.github.io/yass/">SIM</a>
-                     </button>
-                     <button id="no">Nao</button>
-                 </div>
-                </div>
-        </body>
-        <script>
-    let button = document.getElementById('no');
-    let height = window.innerHeight - 50;
-    let width = window.innerWidth - 50;
+        .button-style {
+            height: 45px;
+            min-width: 90px;
+            background: white;
+            border-radius: 8px;
+            color: blue;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            transition: background 0.3s;
+        }
 
-    button.addEventListener('mouseover', function () {
-        button.style.position = "absolute";
-        button.style.top = Math.random() *height + "px";
-        button.style.left = Math.random() *width + "px";
-    })
-        </script>
-    </head>
+        .button-style:hover {
+            background: #f0f0f0;
+        }
+
+        @media (max-width: 500px) {
+            .box {
+                font-size: 16px;
+                height: auto;
+                padding: 20px;
+            }
+
+            .button-style {
+                font-size: 14px;
+                min-width: 80px;
+                height: 40px;
+            }
+
+            .heart {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Corações decorativos -->
+    <script>
+        const numHearts = 25;
+        for (let i = 0; i < numHearts; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerText = '❤️';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+            heart.style.fontSize = `${16 + Math.random() * 16}px`;
+            heart.style.animationDuration = `${5 + Math.random() * 5}s`;
+            document.body.appendChild(heart);
+        }
+    </script>
+
+    <!-- Primeira pergunta -->
+    <div class="box" id="firstBox">
+        <p>Você namoraria o João?</p>
+        <div class="buttons-container">
+            <button class="button-style" id="yes">Sim</button>
+            <button class="button-style" id="no">Não</button>
+        </div>
+    </div>
+
+    <!-- Segunda pergunta -->
+    <div class="box" id="secondBox" style="display: none;">
+        <p>Tem certeza? 😏</p>
+        <div class="buttons-container">
+            <button class="button-style">Sim 😳</button>
+            <button class="button-style" id="no2">Não</button>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const noButton2 = document.getElementById('no2');
+        const firstBox = document.getElementById('firstBox');
+        const secondBox = document.getElementById('secondBox');
+
+        function fugirDoMouse(botao) {
+            const height = window.innerHeight - 50;
+            const width = window.innerWidth - 80;
+            botao.style.position = "absolute";
+            botao.style.top = Math.random() * height + "px";
+            botao.style.left = Math.random() * width + "px";
+        }
+
+        noButton.addEventListener('mouseover', () => fugirDoMouse(noButton));
+        noButton2.addEventListener('mouseover', () => fugirDoMouse(noButton2));
+
+        yesButton.addEventListener('click', () => {
+            firstBox.style.display = "none";
+            secondBox.style.display = "flex";
+        });
+    </script>
+</body>
 </html>
