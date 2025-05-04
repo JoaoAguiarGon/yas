@@ -1,110 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <Link:favicon> <p>💖</p></Link:favicon>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: #fce4ec;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            font-family: sans-serif;
-        }
+    <title>Perguntas para yas💖</title>
 
-        .heart {
-            color: #ff4d6d;
-            font-size: 24px;
-            position: absolute;
-            animation: float 10s infinite;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .box {
-            font-size: 18px;
-            width: 90%;
-            max-width: 400px;
-            height: 280px;
-            color: white;
-            border-radius: 20px;
-            background: black;
-            flex-direction: column;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 10;
-            padding: 20px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-
-        .buttons-container {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            max-width: 300px;
-            margin-top: 20px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .button-style {
-            height: 45px;
-            min-width: 90px;
-            background: white;
-            border-radius: 8px;
-            color: blue;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            position: relative;
-            transition: background 0.3s;
-        }
-
-        .button-style:hover {
-            background: #f0f0f0;
-        }
-
-        @media (max-width: 500px) {
-            .box {
-                font-size: 16px;
-                height: auto;
-                padding: 20px;
-            }
-
-            .button-style {
-                font-size: 14px;
-                min-width: 80px;
-                height: 40px;
-            }
-
-            .heart {
-                font-size: 18px;
-            }
-        }
-    </style>
+    <!-- Vinculando o arquivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Corações decorativos -->
+    <!-- Corações -->
     <script>
         const numHearts = 25;
         for (let i = 0; i < numHearts; i++) {
@@ -131,35 +38,43 @@
 
     <!-- Segunda pergunta -->
     <div class="box" id="secondBox" style="display: none;">
-        <p>Tem certeza? 😏</p>
+        <p>Vc Sairia com ele? 😏</p>
         <div class="buttons-container">
-            <button class="button-style">Sim 😳</button>
+            <button class="button-style" id="yes2">Sim 😳</button>
             <button class="button-style" id="no2">Não</button>
         </div>
     </div>
 
-    <script>
-        const noButton = document.getElementById('no');
-        const yesButton = document.getElementById('yes');
-        const noButton2 = document.getElementById('no2');
-        const firstBox = document.getElementById('firstBox');
-        const secondBox = document.getElementById('secondBox');
+    <!-- Terceira pergunta (Ir ao cinema) -->
+    <div class="box" id="thirdBox" style="display: none;">
+        <p>Você aceita ir ao cinema assistir Minecraft comigo? 🍿🎮</p>
+        <div class="buttons-container">
+            <button class="button-style" id="yes3">Sim, claro!</button>
+            <button class="button-style" id="no3">Não</button>
+        </div>
+    </div>
 
-        function fugirDoMouse(botao) {
-            const height = window.innerHeight - 50;
-            const width = window.innerWidth - 80;
-            botao.style.position = "absolute";
-            botao.style.top = Math.random() * height + "px";
-            botao.style.left = Math.random() * width + "px";
-        }
+    <!-- Quarta pergunta -->
+    <div class="box" id="fourthBox" style="display: none;">
+        <p>Você aceita ir ao cinema comigo assistir Minecraft? 😎🎮</p>
+        <div class="buttons-container">
+            <button class="button-style" id="yes4">Sim, aceito!</button>
+            <button class="button-style" id="no4">Não</button>
+        </div>
+    </div>
 
-        noButton.addEventListener('mouseover', () => fugirDoMouse(noButton));
-        noButton2.addEventListener('mouseover', () => fugirDoMouse(noButton2));
+    <!-- Caixa final com a mensagem "Date marcado" -->
+    <div class="box" id="finalBox" style="display: none;">
+        <div id="finalMessageBox"></div>
+    </div>
 
-        yesButton.addEventListener('click', () => {
-            firstBox.style.display = "none";
-            secondBox.style.display = "flex";
-        });
-    </script>
+    <!-- Mensagem centralizada de "Date marcado!" -->
+    <div id="dateMessage" class="dateMessage" style="display: none;">
+        Date marcado! ❤️
+    </div>
+
+    <!-- Vinculando o arquivo JS externo -->
+    <script src="script.js"></script>
+
 </body>
 </html>
